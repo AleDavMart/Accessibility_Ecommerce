@@ -7,7 +7,8 @@ export const Product = (props) => {
         description,
         features,
         price,
-        images
+        images,
+        stocklevel
 
     } = props.product
 
@@ -35,14 +36,27 @@ export const Product = (props) => {
                     return <li key={idx}>{feature}</li>
                 })}
             </ul>
+            <p>
+                Stock level: {stockLevel}
+            </p>
             <p>&pound;{price}</p>
             <div className="promo-blocks__actions">
                 <a className="button--anchor">
                     Full Details
                 </a>
-                <button onClick={addToCart(props.product)}>
-                    Add to cart
-                </button>
+                {(!props.cartStatus) ? //This is a function to check the data of the cartStatus - is there anything stored in there 
+                    <button onClick={() => {
+                        props.addToCart(props.product) //Invoking the Add to cart function from the parent component.
+                        props.setCartStatus(props.id) //add the product ID to the CART state (data)
+                    }}> add to cart
+                    </button>
+                    :
+                    <button onClick={() => {
+                        props.removeFromCart(props.product)
+                        props.setCartStatus(props.id)
+                    }}> Remove from cart
+                    </button>
+                }
             </div>
         </article>
     )
