@@ -4,7 +4,7 @@ import { useState } from "react";
 export const Img = props => {
     const [title, setTitle] = useState('')
     const [heart, setHeart] = useState(true)
-    const [stockLevel, setStockLevel] = useState('stockLevel')
+    // const [stockLevel, setStockLevel] = useState('stockLevel')
 
     const overlayStyles = {
         position: 'absolute',

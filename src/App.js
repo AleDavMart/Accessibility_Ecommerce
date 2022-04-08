@@ -1,34 +1,33 @@
 
-import './App.css';
-import data from './products.json';
-import { Product } from './Product';
-
-const [cart, setCart] = useState(data.cart)
-const [cartStatus, setStatus] = useState({})
-
-
-const addToCart = (product) => {
-    setCart([...cart, product])
-}
-
-const removeFromCart = (product) => {
-  setCart(cart.filter(item => item !== product))
-}
-
-const setCartStatus = (key) => {
-  setStatus({...cartStatus, [key]: !cartStatus[key]})
-  console.log('THIS IS CART STATUS', cartStatus)
-}
+import About from './About';
+import Contact from './Contact';
+import Home from './Home';
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom' //include the Switch when coming back
+// Switch import was replaced by Routes in react-router-dom-v6
 
 
 function App() {
   return (
-    <div className="App">
-       {data.products.map(product => <Product key={product.productId} id={product.productId} product={product} addToCart={addToCart} 
-        removeFromCart={removeFromCart} setCartStatus={setCartStatus} cartStatus={cartStatus[product.productId]} />)}
-     
-     <p>Items in cart {cart.length}</p>
-    </div>
+    <Router>
+      <header>
+        <nav>
+          <link to="/">Home</link>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
+        </nav>
+      </header>
+      <Routes >
+        <Route path="/contact">
+          <Contact />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
